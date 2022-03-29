@@ -14,8 +14,17 @@
                   formControlName="username"
                   class="form-control">
                   <span *ngIf="!signUpform.get('userData.username')!.valid && signUpform.get('userData.username')!.touched">
-                        Please enter Username
+                   
+                   <span *ngIf="signUpform.get('userData.username')!.errors!['nameForbidden']"> 
+                      Username Forbidden
+                     </span> 
+
+                      <span *ngIf="signUpform.get('userData.username')!.errors!['required']"> 
+                      Username is not valid
+                     </span> 
+
                   </span>
+                              
               </div>
               <div class="form-group">
                 <label for="email">email</label>
@@ -25,10 +34,41 @@
                   formControlName="email"
                   class="form-control">
                   <span *ngIf="!signUpform.get('userData.email')!.valid && signUpform.get('userData.email')!.touched">
-                    Please enter valid Email
+                    Please enter a  valid Email
               </span>
               </div>
         </div>
+
+
+        <div class="form-group">
+          <label for="username">Password</label>
+          <input
+            type="pasword"
+            id="username"
+            formControlName="password"
+            class="form-control">
+            <span *ngIf="!signUpform.get('password')!.valid && signUpform.get('password')!.touched">
+             
+             <span *ngIf="signUpform.get('password')!.errors!['hasCapital']"> 
+                Password Must have Capital Letter
+               </span> 
+               <br>
+               <span *ngIf="signUpform.get('password')!.errors!['hasNumeric']"> 
+               Password Must have A Numeric Value
+               </span> 
+               <br>
+               <span *ngIf="signUpform.get('password')!.errors!['hasSpecial']"> 
+               Passord Must have a special Character
+               </span> 
+               <br>
+                <span *ngIf="signUpform.get('password')!.errors!['required']"> 
+                Password is Required
+               </span> 
+
+            </span>
+                        
+        </div>
+
           <div class="radio" *ngFor="let gender of genders">
             <label>
               <input
@@ -58,7 +98,8 @@
       </span>
       <br>
       <br>
-          <button class="btn btn-primary" type="submit">Submit</button>
+      <!-- [disabled]="!signUpform.valid" -->
+          <button  class="btn btn-primary" type="submit">Submit</button>
         </form>
       </div>
     </div>
